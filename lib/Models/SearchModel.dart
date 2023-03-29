@@ -7,9 +7,4 @@ class CurrentList extends ChangeNotifier {
     ItemList = temp;
     notifyListeners();
   }
-
-  void reset() {
-    ItemList = [];
-    notifyListeners();
-  }
 }

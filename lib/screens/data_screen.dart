@@ -22,8 +22,10 @@ class data extends StatefulWidget {
   State<data> createState() => _dataState();
 }
 
+//demo@thenotary.app
 class _dataState extends State<data> {
   late Future<bool> init;
+
   UserController newUser = UserController();
 
   List<String> updateList(String searchQuery, List<String> stringList) {
@@ -37,17 +39,15 @@ class _dataState extends State<data> {
   }
 
   UpdatingFunction(value) {
-    print(value);
-    print("working");
     if (value == "") {
       firstInstance.assign(newUser.companiesNameList);
     } else {
       firstInstance.assign(updateList(value, newUser.companiesNameList));
-      print("firstInstance size-->${firstInstance.ItemList.length}");
     }
   }
 
   Future<bool> initilize() async {
+    newUser.emailId = widget.mailId;
     await newUser.makePostRequest();
 
     firstInstance.assign(newUser.companiesNameList);
@@ -58,6 +58,7 @@ class _dataState extends State<data> {
   @override
   void initState() {
     init = initilize();
+
     super.initState();
   }
 

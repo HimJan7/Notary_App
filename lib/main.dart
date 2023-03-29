@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'screens/data_screen.dart';
 import 'screens/login_screen.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await await GetStorage.init();
   runApp(MyApp());
 }
 
@@ -14,9 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: data(
-        mailId: '',
-      ),
+      home: LoginScreen(),
     );
   }
 }
