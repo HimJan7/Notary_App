@@ -8,7 +8,7 @@ import 'list_view.dart';
 class UserController extends GetxController {
   RxString message = ''.obs;
 
-  List<companiesListWidget> companiesNameList = [];
+  List<String> companiesNameList = [];
   // final box = GetStorage();
   Future<void> makePostRequest() async {
     Dio dio = Dio();
@@ -22,9 +22,9 @@ class UserController extends GetxController {
           data: data);
 
       List<dynamic> companiesList = response.data['data']['companiesList'];
+
       for (var company in companiesList) {
-        companiesNameList
-            .add(companiesListWidget(companyName: company['name']));
+        companiesNameList.add(company['name']);
         print(company['name']);
       }
     } catch (e) {
