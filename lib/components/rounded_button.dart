@@ -9,20 +9,17 @@ class roundButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: Material(
-        elevation: 5.0,
-        color: buttonColor,
-        borderRadius: BorderRadius.circular(30.0),
-        child: MaterialButton(
-          onPressed: onPress,
-          minWidth: MediaQuery.of(context).size.width * 0.3,
-          height: MediaQuery.of(context).size.height * 0.06,
-          child: Text(
-            name,
-            style: TextStyle(color: Colors.white),
-          ),
+    return Material(
+      elevation: 5.0,
+      color: buttonColor,
+      borderRadius: BorderRadius.circular(30.0),
+      child: MaterialButton(
+        onPressed: onPress,
+        minWidth: MediaQuery.of(context).size.width * 0.3,
+        height: 5,
+        child: Text(
+          name,
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );

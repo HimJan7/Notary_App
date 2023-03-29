@@ -13,50 +13,55 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.24,
-          ),
-          Container(
-            height: 30.0,
-            width: 200.0,
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              border: Border.all(
-                color: Colors.black,
-                width: 1.0,
-              ),
+      body: Container(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.24,
             ),
-            child: TextField(
-              controller: EmailController,
-              decoration: InputDecoration(
-                hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.black),
-                border: InputBorder.none,
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+            Container(
+              height: 30.0,
+              width: 200.0,
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                border: Border.all(
+                  color: Color(0xFF000000),
+                  width: 1.0,
+                ),
               ),
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          roundButton(
-              buttonColor: Colors.black45,
-              onPress: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => data(
-                      mailId: EmailController.text,
-                    ),
+              child: TextField(
+                controller: EmailController,
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                  hintStyle: TextStyle(
+                    color: Color(0xFF000000),
                   ),
-                );
-              },
-              name: 'Login')
-        ],
+                  border: InputBorder.none,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            roundButton(
+                buttonColor: Color(0xFF424242),
+                onPress: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => data(
+                        mailId: EmailController.text,
+                      ),
+                    ),
+                  );
+                },
+                name: 'Login')
+          ],
+        ),
       ),
     );
   }
