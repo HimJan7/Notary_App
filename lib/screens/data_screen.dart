@@ -48,10 +48,10 @@ class _dataState extends State<data> {
   }
 
   Future<bool> initilize() async {
-    setState(() {
-      newUser.makePostRequest();
-      firstInstance.ItemList = newUser.companiesNameList;
-    });
+    await newUser.makePostRequest();
+
+    firstInstance.assign(newUser.companiesNameList);
+
     return true;
   }
 
