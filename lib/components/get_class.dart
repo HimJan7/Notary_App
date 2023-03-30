@@ -6,13 +6,12 @@ import 'package:get_storage/get_storage.dart';
 import 'list_view.dart';
 
 class UserController extends GetxController {
-  String emailId = '';
   final box = GetStorage();
   final String listKey = 'companiesListKey';
   final String userKey = 'emailId';
   List<String> companiesNameList = [];
 
-  Future<void> makePostRequest() async {
+  Future<void> makePostRequest(String emailId) async {
     Dio dio = Dio();
     Map<String, dynamic> data = {
       'email': emailId,

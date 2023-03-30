@@ -47,11 +47,8 @@ class _dataState extends State<data> {
   }
 
   Future<bool> initilize() async {
-    newUser.emailId = widget.mailId;
-    await newUser.makePostRequest();
-
+    await newUser.makePostRequest(widget.mailId);
     firstInstance.assign(newUser.companiesNameList);
-
     return true;
   }
 
@@ -78,11 +75,15 @@ class _dataState extends State<data> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                    Text('Companies List'),
+                    Text(
+                      'Companies List',
+                      style: TextStyle(color: Color(0xFF424242)),
+                    ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.008,
                     ),
-                    Text('${value.ItemList.length} companies Found'),
+                    Text('${value.ItemList.length} companies Found',
+                        style: TextStyle(color: Color(0xFF424242))),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.025,
                     ),
@@ -97,11 +98,12 @@ class _dataState extends State<data> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.025,
+                      height: MediaQuery.of(context).size.height * 0.01,
                     ),
                     Expanded(
-                      child: Container(
-                        width: double.infinity,
+                      child: MediaQuery.removePadding(
+                        removeTop: true,
+                        context: context,
                         child: ListView.builder(
                           itemCount: value.ItemList.length,
                           itemBuilder: (context, index) {
