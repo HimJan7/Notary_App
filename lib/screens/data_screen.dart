@@ -1,23 +1,13 @@
-import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:notary_app/constants.dart';
-import 'package:http/http.dart' as http;
-import 'package:get/get.dart';
 import 'package:notary_app/components/get_class.dart';
 import 'package:provider/provider.dart';
-
 import '../Models/SearchModel.dart';
 import '../components/list_view.dart';
 
-CurrentList firstInstance = CurrentList();
-
 class data extends StatefulWidget {
-  data({super.key, required this.mailId});
-  String mailId;
+  data({super.key, required this.newUser});
+  UserController newUser;
   @override
   State<data> createState() => _dataState();
 }
@@ -25,9 +15,7 @@ class data extends StatefulWidget {
 //demo@thenotary.app
 class _dataState extends State<data> {
   late Future<bool> init;
-
-  UserController newUser = UserController();
-
+  CurrentList firstInstance = CurrentList();
   List<String> updateList(String searchQuery, List<String> stringList) {
     List<String> matchedStrings = [];
     for (String string in stringList) {
@@ -40,22 +28,15 @@ class _dataState extends State<data> {
 
   UpdatingFunction(value) {
     if (value == "") {
-      firstInstance.assign(newUser.companiesNameList);
+      firstInstance.assign(widget.newUser.companiesNameList);
     } else {
-      firstInstance.assign(updateList(value, newUser.companiesNameList));
+      firstInstance.assign(updateList(value, widget.newUser.companiesNameList));
     }
-  }
-
-  Future<bool> initilize() async {
-    await newUser.makePostRequest(widget.mailId);
-    firstInstance.assign(newUser.companiesNameList);
-    return true;
   }
 
   @override
   void initState() {
-    init = initilize();
-
+    firstInstance.assign(widget.newUser.companiesNameList);
     super.initState();
   }
 

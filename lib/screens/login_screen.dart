@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:notary_app/constants.dart';
 import 'package:notary_app/components/rounded_button.dart';
 import 'package:notary_app/screens/data_screen.dart';
+import 'package:notary_app/components/get_class.dart';
+import 'package:loading_overlay_pro/loading_overlay_pro.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
-  static const id = 'Login_Screen';
+  String mailId = '';
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool isLoading = false;
   @override
   TextEditingController EmailController = TextEditingController();
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -48,18 +54,38 @@ class LoginScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.05,
             ),
             roundButton(
-                buttonColor: Color(0xFF424242),
+                buttonColor: Color.fromARGB(255, 15, 8, 8),
                 onPress: () async {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => data(
-                        mailId: EmailController.text,
+                  if (EmailController.text != '') {
+                    setState(() {
+                      isLoading = true;
+                    });
+
+                    UserController saveUser = UserController();
+                    await saveUser.makePostRequest(EmailController.text);
+                    setState(() {
+                      isLoading = false;
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => data(
+                          newUser: saveUser,
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  }
                 },
-                name: 'Login')
+                name: 'Login'),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
+            isLoading
+                ? LoadingBouncingLine.circle(
+                    backgroundColor: Color.fromARGB(255, 15, 8, 8),
+                    borderColor: Color.fromARGB(255, 15, 8, 8),
+                  )
+                : Container(),
           ],
         ),
       ),

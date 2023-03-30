@@ -16,7 +16,7 @@ class roundButton extends StatelessWidget {
       child: MaterialButton(
         onPressed: onPress,
         minWidth: MediaQuery.of(context).size.width * 0.3,
-        height: 5,
+        height: MediaQuery.of(context).size.height * 0.05,
         child: Text(
           name,
           style: TextStyle(color: Colors.white),
